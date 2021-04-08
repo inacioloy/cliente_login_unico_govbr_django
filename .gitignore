@@ -1,0 +1,17 @@
+*˜
+*.pyc
+.idea/
+.DS_Store
+.bash_history
+.bash_profile
+.bashrc
+.cache
+.local
+db.sqlite3
+/.env
+.viminfo
+.virtualenvs
+.ssh
+deploy/media
+deploy/static
+deploy/logs
