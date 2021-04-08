@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container container-fluid">
+            <h1>Autenticar no Login Único - Gov.BR</h1>
+            <hr/>
+            <a class="btn btn-info btn-lg"
+               href="{% url 'social:begin' 'govbr' %}"
+               {% if user.is_authenticated %}disabled="disabled"{% endif %}
+            >
+                Autenticar usando o GovBR
+            </a>
+            {% if user.is_authenticated %}
+                <h2>Usuário Autenticado</h2>
+                <img src="data:image/gif;base64,{{ picture }}"><br/>
+                <span class="text-muted">username:</span> {{ user.username }}<br/>
+                <span class="text-muted">first name:</span> {{ user.first_name }}<br/>
+                <span class="text-muted">last name:</span> {{ user.last_name }}<br/>
+                <span class="text-muted">email:</span> {{ user.email }}<br/>
+                {% with extra_data=user.social_auth.get.extra_data %}
+                    {% for k, v in extra_data.items %}
+                        <span class="text-muted">{{ k }}:</span> {{ v }}<br/>
+                    {% endfor %}
+                {% endwith %}
+                <hr/>
+                <a class="btn btn-danger" href="{% url 'logout' %}?next=/">Encerrar Sessão</a>
+            {% endif %}
+        </div>
+    </body>
+</html>
