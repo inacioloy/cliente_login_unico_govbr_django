@@ -15,7 +15,7 @@ class GovbrOAuth2(BaseOAuth2):
     USER_DATA_URL = settings.USER_DATA_URL
 
     def user_data(self, access_token, *args, **kwargs):
-        return self.request(url=self.USER_DATA_URL, data={'scope': kwargs['response']['scope']}, method='POST', headers={'Authorization': 'Bearer {0}'.format(access_token)}).json()
+        return self.request(url=self.USER_DATA_URL, data={'scope': kwargs['response']['scope']}, method='GET', headers={'Authorization': 'Bearer {0}'.format(access_token)}).json()
 
     def get_user_details(self, response):
         """
